@@ -1,31 +1,33 @@
 class StringBuilder {
-  // Конструктор приймає параметр initialValue, який ініціалізує приватну властивість value
+  #value; // Приватна властивість, недоступна за межами класу
+
   constructor(initialValue) {
-    this.value = initialValue; // Приватна властивість value
+    this.#value = initialValue; // Ініціалізація значення через конструктор
   }
 
-  // Метод для отримання поточного значення value
+  // Публічний метод для отримання значення приватної властивості
   getValue() {
-    return this.value; // Повертає поточне значення приватної властивості value
+    return this.#value;
   }
 
-  // Метод для додавання рядка на початок значення value
-  padStart(str) {
-    this.value = str + this.value; // Додає str на початок value
-  }
-
-  // Метод для додавання рядка в кінець значення value
+  // Додає рядок у кінець значення приватної властивості
   padEnd(str) {
-    this.value = this.value + str; // Додає str в кінець value
+    this.#value += str;
   }
 
-  // Метод для додавання рядка на початок і в кінець значення value
+  // Додає рядок на початок значення приватної властивості
+  padStart(str) {
+    this.#value = str + this.#value;
+  }
+
+  // Додає рядок і на початок, і в кінець значення приватної властивості
   padBoth(str) {
-    this.value = str + this.value + str; // Додає str на початок і в кінець value
+    this.padStart(str); // Використання методу padStart
+    this.padEnd(str);   // Використання методу padEnd
   }
 }
 
-// Перевірка коректності роботи класу
+// Код для перевірки
 const builder = new StringBuilder(".");
 console.log(builder.getValue()); // "."
 builder.padStart("^");
